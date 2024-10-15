@@ -11,7 +11,8 @@ pipeline {
         stage('Docker Image') {
             steps {
                 withDockerRegistry(credentialsId: 'docker', url: 'https://index.docker.io/v1/') {
-                    sh "docker build -t nodejs ."
+                    sh "docker build -t yashthedocker/nodejs ."
+                    sh "docker push yashthedocker/nodejs:latest"
                     sh "docker images"
                 }
             }
