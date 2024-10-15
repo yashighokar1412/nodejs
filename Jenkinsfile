@@ -10,5 +10,7 @@ pipeline {
        stage('docker image') {
             steps {
               withDockerRegistry(credentialsId: 'docker', url: 'https://index.docker.io/v1/)') }
+               sh "docker build -t nodejs ."
+               sh "docker images"
               }
 }
