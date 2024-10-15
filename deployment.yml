@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: youtube-deployment
+  name: nodejs-deployment
   labels:
-    app: youtube
+    app: nodejs
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: youtube
+      app: nodejs
   template:
     metadata:
       labels:
-        app: youtube
+        app: nodejs
     spec:
       containers:
-      - name: youtube
-        image: yashthedocker/youtube:latest
+      - name: nodejs
+        image: yashthedocker/nodejs:latest
         ports:
         - containerPort: 3000
