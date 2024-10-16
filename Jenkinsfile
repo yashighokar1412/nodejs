@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    envrionment{
+        SONAR_HOME= tool "sonar"
+    }
 
     stages {
         stage('Git Checkout') {
