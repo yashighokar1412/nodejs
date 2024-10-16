@@ -1,7 +1,7 @@
 pipeline {
     agent any
-    envrionment{
-        SONAR_HOME= tool "sonar"
+    environment {
+        SONAR_HOME = tool "sonar"
     }
 
     stages {
@@ -10,15 +10,15 @@ pipeline {
                 git 'https://github.com/yashighokar1412/nodejs.git'
             }
         }
-    }
-       stage('sonar Quality check') {
+
+        stage('Sonar Quality Check') {
             steps {
                 withSonarQubeEnv(credentialsId: 'sonar') {
-                    sh"$SONAR_HOME/bin/sonar-scanner -Dsonar.projectName=nodejs -Dsonar.projectKey=nodejs"
-
+                    sh "$SONAR_HOME/bin/sonar-scanner -Dsonar.projectName=nodejs -Dsonar.projectKey=nodejs"
+                }
             }
-       }
-   }
+        }
+
         stage('Docker Image') {
             steps {
                 withDockerRegistry(credentialsId: 'docker', url: 'https://index.docker.io/v1/') {
@@ -29,3 +29,4 @@ pipeline {
             }
         }
     }
+}
