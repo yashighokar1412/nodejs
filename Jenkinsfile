@@ -10,7 +10,15 @@ pipeline {
                 git 'https://github.com/yashighokar1412/nodejs.git'
             }
         }
+    }
+       stage('sonar Quality check') {
+            steps {
+                withSonarQubeEnv(credentialsId: 'sonar') {
+                    sh"$SONAR_HOME/bin/sonar-scanner -Dsonar.projectName=nodejs -Dsonar.projectKey=nodejs"
 
+            }
+       }
+   }
         stage('Docker Image') {
             steps {
                 withDockerRegistry(credentialsId: 'docker', url: 'https://index.docker.io/v1/') {
@@ -20,14 +28,4 @@ pipeline {
                 }
             }
         }
-        stage('k8s deploy') {
-            steps {
-                withAWS(credentials: 'AWS')
-                withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8s', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
-                    sh "kubectl apply -f deployment.yml"
-                    sh "kubectl apply -f service.yml"
-                }
-            }
-        }
     }
-}
