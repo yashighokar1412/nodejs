@@ -29,7 +29,7 @@ pipeline {
             }
         }
 
-        stage('Docker Image') {
+        stage('deploy k8s') {
             steps { 
                 withAWS(credentials: 'AWS') 
                 withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8s', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
