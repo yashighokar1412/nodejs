@@ -5,7 +5,7 @@ metadata:
   labels:
     app: nodejs
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: nodejs
@@ -19,5 +19,3 @@ spec:
         image: yashthedocker/nodejs:latest
         ports:
         - containerPort: 3000
-        command:   # Specify the command here if needed
-        - aws      # Make sure this line is intended and correctly formatted
