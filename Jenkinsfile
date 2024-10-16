@@ -13,7 +13,7 @@ pipeline {
 
         stage('Sonar Quality Check') {
             steps {
-                withSonarQubeEnv(credentialsId: 'sonar'), (installationName: 'sonar') {
+                withSonarQubeEnv(credentialsId: 'sonar', installationName: 'sonar') {
                     sh "$SONAR_HOME/bin/sonar-scanner -Dsonar.projectName=nodejs -Dsonar.projectKey=nodejs"
                 }
             }
