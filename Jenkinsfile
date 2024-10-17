@@ -29,19 +29,20 @@ pipeline {
             }
         }
 
-        stage('aws credentials') {
-            steps { 
-                withAWS(credentials: 'AWS')
-                   s3Upload(bucket: 'my-bucket', file: 'build.zip', path: 'deployments/build.zip')
+        stage('AWS S3 Upload') {
+            steps {
+                withAWS(credentials: 'aws') {
+                    s3Upload(bucket: 'my-bucket', file: 'build.zip', path: 'deployments/build.zip')
                 }
             }
         }
     
-        stage('deploy k8s') {
-            steps { 
-                withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8s', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
-                   sh "kubectl apply -f deployment.yaml"
+        stage('Deploy to Kubernetes') {
+            steps {
+                withKubeConfig(caCertificate: '', clusterName: 'my-cluster', contextName: 'my-context', credentialsId: 'k8s', namespace: 'default', serverUrl: 'https://<cluster-server-url>') {
+                    sh "kubectl apply -f deployment.yaml"
                 }
             }
         }
     }
+}
