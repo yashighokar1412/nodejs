@@ -25,7 +25,7 @@ pipeline {
     
         stage('AWS S3 Upload') {
             steps {
-                withAWS(credentials: 'aws') {
+                withAWS(credentials: 'aws', region: 'us-east-1') {
                     s3Upload(bucket: 'my-nodejs-yash', file: 'build.zip', path: 'deployments/build.zip')
                 }
             }
@@ -33,7 +33,7 @@ pipeline {
     
         stage('Deploy to Kubernetes') {
             steps {
-                withAWS(credentials: 'aws') 
+                withAWS(credentials: 'aws', region: 'us-east-1') {
                 withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8s', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
                     sh "kubectl apply -f deployment.yaml"
                 }
