@@ -29,7 +29,7 @@ pipeline {
             }
         }
 
-        stage('deploy k8s') {
+        stage('aws credentials') {
             steps { 
                 withAWS(credentials: 'AWS')
                    s3Upload(bucket: 'my-bucket', file: 'build.zip', path: 'deployments/build.zip')
