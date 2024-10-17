@@ -37,7 +37,7 @@ pipeline {
     
         stage('AWS S3 Upload') {
             steps {
-                withAWS(credentials: 'aws') {
+                withAWS(credentials: 'aws', region: 'us-east-1') {
                     s3Upload(bucket: 'my-bucket', file: 'build.zip', path: 'deployments/build.zip')
                 }
             }
