@@ -33,7 +33,7 @@ pipeline {
     
         stage('Deploy to Kubernetes') {
             steps {
-                withAWS(credentials: 'aws', region: 'us-east-1') {
+                withAWS(credentials: 'aws', region: 'us-east-1') 
                 withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8s', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
                     sh "kubectl apply -f deployment.yaml"
                 }
