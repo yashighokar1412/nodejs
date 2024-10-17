@@ -29,7 +29,14 @@ pipeline {
             }
         }
 
-        stage('AWS S3 Upload') {
+        stage('Build and Zip') {
+            steps {
+                   sh 'zip -r build.zip .'
+                }
+            }
+       }
+    
+       stage('AWS S3 Upload') {
             steps {
                 withAWS(credentials: 'aws') {
                     s3Upload(bucket: 'my-bucket', file: 'build.zip', path: 'deployments/build.zip')
@@ -45,4 +52,3 @@ pipeline {
             }
         }
     }
-}
