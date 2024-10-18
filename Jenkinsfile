@@ -27,7 +27,7 @@ pipeline {
                                        credentialsId: 'k8s', 
                                        namespace: 'default', 
                                        restrictKubeConfigAccess: false, 
-                                       serverUrl: '172.31.16.228:443, 172.31.83.101:443') {
+                                       serverUrl: 'https://711A4DFE055C0284F9DA129EDB9E3386.gr7.us-east-1.eks.amazonaws.com') {
                             sh "kubectl apply -f deployment.yaml"
                         }
                     }
