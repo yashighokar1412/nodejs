@@ -23,14 +23,6 @@ pipeline {
             }
         }
     
-        stage('AWS S3 Upload') {
-            steps {
-                withAWS(credentials: 'aws', region: 'us-east-1') {
-                    s3Upload(bucket: 'my-nodejs-yash', file: 'build.zip', path: 'deployments/build.zip')
-                }
-            }
-        }
-    
         stage('Deploy to Kubernetes') {
             steps {
                 withAWS(credentials: 'aws', region: 'us-east-1') {
