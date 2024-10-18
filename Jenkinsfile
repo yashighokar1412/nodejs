@@ -19,13 +19,20 @@ pipeline {
     
         stage('Deploy to Kubernetes') {
             steps {
-                script{
-                 withAWS(credentials: 'aws') 
-                 withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8s', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
-                    sh "kubectl apply -f deployment.yaml"
+                script {
+                    withAWS(credentials: 'aws', region: 'us-east-1') {
+                        withKubeConfig(caCertificate: '', 
+                                       clusterName: 'nodejs', 
+                                       contextName: 'arn:aws:eks:us-east-1:084375558659:cluster/nodejs', 
+                                       credentialsId: 'k8s', 
+                                       namespace: 'default', 
+                                       restrictKubeConfigAccess: false, 
+                                       serverUrl: '172.31.16.228:443') {
+                            sh "kubectl apply -f deployment.yaml"
+                        }
+                    }
                 }
             }
         }
     }
-}
 }
