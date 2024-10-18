@@ -19,7 +19,7 @@ pipeline {
     
         stage('Deploy to Kubernetes') {
             steps {
-                withAWS(credentials: 'aws', endpointUrl: '172.31.16.228:443', region: 'us-east-1') {
+                withAWS(credentials: 'aws') {
                     sh "kubectl apply -f deployment.yaml"
                 }
             }
