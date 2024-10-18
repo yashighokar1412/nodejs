@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    environment {
+        SONAR_HOME = tool "sonar"
+    }
+
     stages {
         stage('Git Checkout') {
             steps {
@@ -7,9 +11,19 @@ pipeline {
             }
         }
 
+        stage('Sonar Quality Check') {
+            steps {
+                withSonarQubeEnv(credentialsId: 'sonar', installationName: 'sonar') {
+                    sh "$SONAR_HOME/bin/sonar-scanner -Dsonar.projectName=nodejs -Dsonar.projectKey=nodejs"
+                }
+            }
+        }
+
         stage('Docker Image') {
             steps {
                 withDockerRegistry(credentialsId: 'docker', url: 'https://index.docker.io/v1/') {
+                    sh "docker build -t yashthedocker/nodejs ."
+                    sh "docker push yashthedocker/nodejs:latest"
                     sh "docker images"
                 }
             }
