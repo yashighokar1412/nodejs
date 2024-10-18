@@ -16,12 +16,6 @@ pipeline {
                 }
             }
         }
-
-        stage('Build and Zip') {
-            steps {
-                sh 'zip -r build.zip .'
-            }
-        }
     
         stage('Deploy to Kubernetes') {
             steps {
