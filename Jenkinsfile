@@ -27,7 +27,7 @@ pipeline {
                                        credentialsId: 'k8s', 
                                        namespace: 'default', 
                                        restrictKubeConfigAccess: false, 
-                                       serverUrl: '172.31.16.228:443') {
+                                       serverUrl: '172.31.16.228:443, 172.31.83.101:443') {
                             sh "kubectl apply -f deployment.yaml"
                         }
                     }
