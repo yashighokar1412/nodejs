@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: nodejs
-        image: yashthedocker/nodejs:01
+        image: yashthedocker/nodejs:latest
         ports:
         - containerPort: 3000
