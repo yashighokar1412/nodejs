@@ -40,9 +40,7 @@ pipeline {
                                        namespace: 'default', 
                                        restrictKubeConfigAccess: false, 
                                        serverUrl: 'https://711A4DFE055C0284F9DA129EDB9E3386.gr7.us-east-1.eks.amazonaws.com') {
-                            sh "kubectl apply -f deployment.yaml"
-                            sh "kubectl apply -f service.yml"
-                            sh "kubectl get service"
+                            sh "kubectl apply -f Application.yaml"
                         }
                     }
                 }
