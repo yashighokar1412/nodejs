@@ -28,7 +28,7 @@ pipeline {
                 }
             }
         }
-        stage('Docker Image') {
+        stage('deploy-with-ArgoCD') {
             steps {
                 withAWS(credentials: 'aws')
                 withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8s', namespace: '', restrictKubeConfigAccess: false, serverUrl: '')
