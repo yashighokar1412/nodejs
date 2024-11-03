@@ -28,16 +28,5 @@ pipeline {
                 }
             }
         }
-    
-        stage('Deploy to Kubernetes') {
-            steps {
-                script {
-                    withAWS(credentials: 'aws', region: 'us-east-1') {
-                            sh "kubectl apply -f application.yaml"
-                        }
-                    }
-                }
-            }
-        }
     }
 }
