@@ -31,7 +31,13 @@ pipeline {
         stage('deploy-with-ArgoCD') {
             steps {
                 withAWS(credentials: 'aws')
-                withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8s', namespace: '', restrictKubeConfigAccess: false, serverUrl: '')
+                withKubeConfig(caCertificate: '',
+                               clusterName: 'node',
+                               contextName: 'arn:aws:eks:us-east-1:084375558659:cluster/node',
+                               credentialsId: 'k8s',
+                               namespace: 'default',
+                               restrictKubeConfigAccess: false,
+                               serverUrl: 'https://300F08D3D21CEBDE9C9AC1A43A181A80.gr7.us-east-1.eks.amazonaws.com')
                     sh 'kubectl apply -f application.yaml'
                 }
             }
