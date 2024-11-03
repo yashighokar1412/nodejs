@@ -33,14 +33,7 @@ pipeline {
             steps {
                 script {
                     withAWS(credentials: 'aws', region: 'us-east-1') {
-                        withKubeConfig(caCertificate: '', 
-                                       clusterName: 'nodejs', 
-                                       contextName: 'arn:aws:eks:us-east-1:084375558659:cluster/nodejs', 
-                                       credentialsId: 'k8s', 
-                                       namespace: 'default', 
-                                       restrictKubeConfigAccess: false, 
-                                       serverUrl: 'https://711A4DFE055C0284F9DA129EDB9E3386.gr7.us-east-1.eks.amazonaws.com') {
-                            sh "kubectl apply -f Application.yaml"
+                            sh "kubectl apply -f application.yaml"
                         }
                     }
                 }
